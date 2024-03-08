@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2024 at 07:11 PM
+-- Generation Time: Mar 08, 2024 at 01:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,17 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `eshopper_users`
 --
 
-CREATE TABLE `users` (
-  `u_id` int(11) NOT NULL,
-  `u_fname` int(11) NOT NULL,
-  `u_lname` int(11) NOT NULL,
-  `u_number` int(11) NOT NULL,
-  `u_address` int(11) NOT NULL,
-  `u_email` int(11) NOT NULL,
-  `u_password` int(11) NOT NULL
+CREATE TABLE `eshopper_users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_number` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,20 +40,20 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `eshopper_users`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`u_id`);
+ALTER TABLE `eshopper_users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `eshopper_users`
 --
-ALTER TABLE `users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `eshopper_users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
