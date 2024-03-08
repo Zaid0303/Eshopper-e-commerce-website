@@ -4,16 +4,14 @@ include('includes/topbar.php');
 include('includes/navbar.php');
 include('config.php');
 
-if (isset($_POST['register'])) {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
+if(isset($_POST['register'])) {
+    $fullname = $_POST['fullname'];
     $phone_no = $_POST['phone_no'];
-    $address = $_POST['address'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
     $hashpass = password_hash($pass, PASSWORD_BCRYPT);
-    $check_email = "SELECT * FROM users where `u_email` = '$email'";
+    $check_email = "SELECT * FROM `eshopper_users` where `user_email` = '$email'";
     $check_email_result = mysqli_query($connection, $check_email);
     if (mysqli_num_rows($check_email_result) > 0) {
         echo "
@@ -22,8 +20,8 @@ if (isset($_POST['register'])) {
             </script>
             ";
     } else {
-        $insert_user = "INSERT INTO `users` (`u_id`, `u_fname`, `u_lname`, `u_number`, `u_address`, `u_email`, `u_password`)
-             VALUES (NULL, '$fname', '$lname', '$phone_no', '$address', '$email', '$hashpass')";
+        $insert_user = "INSERT INTO `eshopper_users` (`user_id`, `user_name`, `user_number`, `user_email`, `user_password`) 
+        VALUES (NULL, '$fullname', '$phone_no', '$email', '$hashpass')";
         if ($insert_user) {
             echo "
                 <script>
@@ -53,23 +51,13 @@ if (isset($_POST['register'])) {
         <form action="register.php" method="POST" class="form-group">
             <div class="row">
                 <div class="col-md-6 control-group">
-                    <input type="text" class="form-control" name="fname" placeholder="Frist Name" required="required"
-                        data-validation-required-message="Please enter your first name" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="col-md-6 control-group">
-                    <input type="text" class="form-control" name="lname" placeholder="Last Name" required="required"
-                        data-validation-required-message="Please enter your last name" />
+                    <input type="text" class="form-control" name="fullname" placeholder="Your Full Name" required="required"
+                        data-validation-required-message="Please enter your full name" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="col-md-6 control-group">
                     <input type="number" class="form-control" name="phone_no" placeholder="Phone Number"
                         required="required" data-validation-required-message="Please enter your phone number" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="col-md-6 control-group">
-                    <input type="text" class="form-control" name="address" placeholder="Address" required="required"
-                        data-validation-required-message="Please enter your address" />
                     <p class="help-block text-danger"></p>
                 </div>
             </div>
@@ -87,7 +75,7 @@ if (isset($_POST['register'])) {
 
             <div class="">
                 <input type="submit" class="btn btn-primary py-2 px-4" name="register" value="Register"
-                    style="width: 100%" id="sendMessageButton">
+                    style="width: 100%">
             </div>
 
             <div class="text-center my-3">

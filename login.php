@@ -23,8 +23,7 @@ include('includes/navbar.php');
                 <p class="help-block text-danger"></p>
             </div>
             <div>
-                <input style="width: 100%" class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton"
-                    value="Login">
+                <input type="submit" class="btn btn-primary py-2 px-4" value="Login" style="width: 100%">
             </div>
 
             <div class="text-center my-3">
