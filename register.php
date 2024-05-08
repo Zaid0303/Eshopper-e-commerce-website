@@ -10,32 +10,34 @@ if(isset($_POST['register'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
+    // Prevent SQL Injection
+    $fullname = mysqli_real_escape_string($connection, $fullname);
+    $phone_no = mysqli_real_escape_string($connection, $phone_no);
+    $email = mysqli_real_escape_string($connection, $email);
+
     $hashpass = password_hash($pass, PASSWORD_BCRYPT);
-    $check_email = "SELECT * FROM `eshopper_users` where `user_email` = '$email'";
+    $check_email = "SELECT * FROM `eshopper_users` WHERE `user_email` = '$email'";
     $check_email_result = mysqli_query($connection, $check_email);
     if (mysqli_num_rows($check_email_result) > 0) {
-        echo "
-            <script>
-            alert('Invaild Email');
-            </script>
-            ";
+        echo "<script>
+        alert('Invalid Email');
+        window.location.href='register.php'
+        </script>";
     } else {
         $insert_user = "INSERT INTO `eshopper_users` (`user_id`, `user_name`, `user_number`, `user_email`, `user_password`) 
         VALUES (NULL, '$fullname', '$phone_no', '$email', '$hashpass')";
-        if ($insert_user) {
-            echo "
-                <script>
-                alert('Registration Successfull');
-                </script>
-                ";
+        // Execute the Insert Query
+        if (mysqli_query($connection, $insert_user)) {
+            echo "<script>
+            alert('Registration Successful');
+            window.location.href='login.php'
+            </script>";
         } else {
-            echo "
-                <script>
-                alert('Registration failed');
-                </script>
-                ";
+            echo "<script>
+            alert('Registration Failed');
+            window.location.href='register.php'
+            </script>";
         }
-
     }
 }
 

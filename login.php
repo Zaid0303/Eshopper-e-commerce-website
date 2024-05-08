@@ -3,7 +3,35 @@ include('includes/header.php');
 include('includes/topbar.php');
 include('includes/navbar.php');
 ?>
+<?php 
+include('config.php');
 
+if(isset($_POST['login'])){
+    $login_email =  $_POST['email'];
+    $login_pass = $_POST['password'];
+
+    $verify_email = "SELECT * FROM `eshopper_users` where `user_email` = '$login_email'";
+    $verify_result = mysqli_query($connection, $verify_email);
+    if($verify_result){
+        if(mysqli_num_rows($verify_result) == 1){
+                echo "<script> 
+                alert('Login successful');
+                window.location.href='index.php'
+                </script>";
+            }else {
+                echo "<script> 
+                alert('Invalid Password');
+                window.location.href='login.php'
+                </script>";
+            }
+        } else {
+            echo "<script> 
+            alert('Invalid Email');
+            window.location.href='login.php'
+            </script>";
+        }
+    } 
+?>
 <!-- Register Form Start -->
 <div class="container pt-5">
     <div class="text-center mb-4">
@@ -11,19 +39,19 @@ include('includes/navbar.php');
     </div>
     <div class="contact-form">
         <div id="success"></div>
-        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+        <form action="login.php" method="POST" class="form-group">
             <div class="control-group">
-                <input type="email" class="form-control" id="email" placeholder="Your Email" required="required"
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required="required"
                     data-validation-required-message="Please enter your email" />
                 <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
-                <input type="password" class="form-control" id="password" placeholder="Password" required="required"
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required"
                     data-validation-required-message="Please enter a password" />
                 <p class="help-block text-danger"></p>
             </div>
             <div>
-                <input type="submit" class="btn btn-primary py-2 px-4" value="Login" style="width: 100%">
+                <input type="submit" class="btn btn-primary py-2 px-4" value="Login" name="login"  style="width: 100%">
             </div>
 
             <div class="text-center my-3">

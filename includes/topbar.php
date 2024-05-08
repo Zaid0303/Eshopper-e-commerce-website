@@ -50,12 +50,13 @@
             </div>
             <div class="col-lg-3 col-6 text-right">
                 <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
+                    <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
                 <a href="" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <i class="fas fa-user text-primary"></i>
+                    
+                    <!-- <span class="badge">0</span> -->
                 </a>
             </div>
         </div>
